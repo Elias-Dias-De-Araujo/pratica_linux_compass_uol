@@ -1,8 +1,66 @@
-# pratica_linux_compass_uol
-Está prática, foi realizada no programa de bolsa estágio AWS e DevSecOps, ofertado pela Compass UOL.
+# Atividade Prática De Linux
+## Detalhes
+Toda a atividade foi realizada no ambiente da AWS, e toda a parte da prática foi feita utilizando instâncias EC2.
 
-# Atividade
-Configurar NFS, tanto o lado do servidor quanto o lado do cliente e criar uma pasta compartilhada entre o servidor e o cliente.
-Subir um servidor apache no lado do cliente.
-Criar um script para verificar se o servidor está online ou offline e gerar o log para cada uma das situações.
-Direcionar cada log gerado para o diretório compartilhado.
+- Duas instâncias EC2 criadas.
+- Uma VPC foi criada.
+- Uma subnet foi criada.
+- Um security group foi criado
+- Uma chave de acesso foi criada.
+
+## Características da atividade
+
+- Configurar NFS, tanto o lado do servidor quanto o lado do cliente e criar uma pasta compartilhada entre o servidor e o cliente.
+- Subir um servidor apache no lado do cliente.
+- Criar um script para verificar se o servidor está online ou offline e gerar o log para cada uma das situações.
+- Direcionar cada log gerado para o diretório compartilhado.
+
+## Configuração do NFS
+
+
+Na máquina que funciona como **servidor**.
+
+```sh
+sudo yum update -y
+sudo mkdir /seu_nome
+sudo vim /etc/exports
+```
+
+Ao abrir o arquivo para edição, digita-se:
+
+For production environments...
+
+```sh
+/seu_nome  ip_maquina_cliente(rw,no_root_squash,sync)
+```
+
+As opções passadas entre parênteses significam:
+- **rw**: Permitir que os cliente possam acessar os arquivos presentes na pasta compartilhada do filesystem no modo leitura e escrita.
+- **no_root_squash**: Permitir que os clientes mantenham seus privilégios de usuário root ao acessar a pasta do filesystem.
+- **sync** : Funciona como uma forma de sincronizar as mudanças feitas dentros da pasta do filesystem, fazendo com que quaisquer mudanças sejam gravas imediatamente.
+
+
+Após isso 
+
+```sh
+# Iniciar o servidor
+sudo systemctl start nfs-server
+# Iniciar o servidor junto da máquina
+sudo systemctl enable nfs-server 
+```
+
+Agora na máquina que funciona como **cliente**.
+
+```sh
+sudo mkdir /seu_nome
+# Montar o compartilhamento NFS
+sudo mount -t nfs ip_servidor:/seu_nome /seu_nome
+```
+
+Caso esteja no diretório pessoal, ou qualquer outro fora do raiz, deve-se passar o caminho pra o diretório em questão, por exemplo, caso a pasta tenha sido criada no seu diretório pessoal, o comando fica da seguinte forma: 
+
+```sh
+sudo mount -t nfs ip_servidor:/seu_nome  ~/seu_nome
+```
+
+## Configuração do servidor apache
