@@ -64,3 +64,41 @@ sudo mount -t nfs ip_servidor:/seu_nome  ~/seu_nome
 ```
 
 ## Configuração do servidor apache
+
+Para distribuições que tem debian como base, o nome do pacote seria apache2, todavia, como a AMI escolhida foi o Amazon Linux 2, então ele tem red hat como base, logo o nome do pacote aqui é httpd.
+
+```sh
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+```
+
+## Script para geração de logs do servidor 
+
+```sh
+#!/bin/bash
+
+date_hour=$(date +"%Y-%m-%d-%H:%M:%S")
+status_server=$(systemctl is-active httpd)
+
+if [ "$status_server" == "active" ]; then
+    msg="ONLINE"
+else
+    msg="OFFLINE"
+fi
+
+# Essa variável guarda o caminho para a pasta compartilhada com o filesystem
+archive_name="../seu_diretorio/$date_hour.txt"
+
+echo "$date_hour + httpd + $status_server + $msg" > "$archive_name"
+
+```
+
+## Execução automatizada
+
+A execucação automatizada do script foi feita usando o crontab, utilizando:
+
+```sh
+crontab -e
+*/5 * * * * /bin/bash ../nome_script.sh
+```
