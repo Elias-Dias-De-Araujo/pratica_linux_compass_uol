@@ -7,6 +7,7 @@ Toda a atividade foi realizada no ambiente da AWS, e toda a parte da prática fo
 - Uma subnet foi criada.
 - Um security group foi criado
 - Uma chave de acesso foi criada.
+- Dois Elastic IPs foram criados.
 
 ## Características da atividade
 
@@ -78,7 +79,7 @@ sudo systemctl enable httpd
 ```sh
 #!/bin/bash
 
-date_hour=$(date +"%Y-%m-%d-%H:%M:%S")
+date_hour=$(TZ="America/Fortaleza" date +"%Y-%m-%d %H:%M:%S")
 status_server=$(systemctl is-active httpd)
 
 if [ "$status_server" == "active" ]; then
@@ -87,8 +88,8 @@ else
     msg="OFFLINE"
 fi
 
-# Essa variável guarda o caminho para a pasta compartilhada com o filesystem
-archive_name="../seu_diretorio/$date_hour.txt"
+# Variável guarda o caminho para pasta do filesystem que ficam os logs
+archive_name="/sua_pasta/$date_hour.txt"
 
 echo "$date_hour + httpd + $status_server + $msg" > "$archive_name"
 
