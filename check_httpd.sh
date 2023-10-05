@@ -1,6 +1,6 @@
 #!/bin/bash
 
-date_hour=$(date +"%Y-%m-%d-%H:%M:%S")
+date_hour=$(TZ="America/Fortaleza" date +"%Y-%m-%d %H:%M:%S")
 status_server=$(systemctl is-active httpd)
 
 if [ "$status_server" == "active" ]; then
@@ -9,8 +9,7 @@ else
     msg="OFFLINE"
 fi
 
-# Essa variável guarda o caminho para a pasta compartilhada com o filesystem
-archive_name="../seu_diretorio/$date_hour.txt"
+# Variável guarda o caminho para pasta do filesystem que ficam os logs
+archive_name="/sua_pasta/$date_hour.txt"
 
 echo "$date_hour + httpd + $status_server + $msg" > "$archive_name"
-
