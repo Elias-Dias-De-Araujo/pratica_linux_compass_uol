@@ -29,8 +29,6 @@ sudo vim /etc/exports
 
 Ao abrir o arquivo para edição, digita-se:
 
-For production environments...
-
 ```sh
 /seu_nome  ip_maquina_cliente(rw,no_root_squash,sync)
 ```
