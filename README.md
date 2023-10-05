@@ -12,8 +12,8 @@ Toda a atividade foi realizada no ambiente da AWS, e toda a parte da prática fo
 ## Características da atividade
 
 - Configurar NFS, tanto o lado do servidor quanto o lado do cliente e criar uma pasta compartilhada entre o servidor e o cliente.
-- Subir um servidor apache no lado do cliente.
-- Criar um script para verificar se o servidor está online ou offline e gerar o log para cada uma das situações.
+- Subir um servidor apache no lado do servidor nfs.
+- Criar um script para verificar se o servidor apache está online ou offline e gerar o log para cada uma das situações.
 - Direcionar cada log gerado para o diretório compartilhado.
 
 ## Configuração do NFS
