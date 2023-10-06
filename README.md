@@ -62,7 +62,7 @@ Caso esteja no diretório pessoal, ou qualquer outro fora do raiz, deve-se passa
 sudo mount -t nfs ip_servidor:/seu_nome  ~/seu_nome
 ```
 
-Para manter o ponto e montagem mesmo após as máquinas terem sido desligadas, basta abrir o arquivo /etc/fstab na máquina cliente e adicionar a linha:
+Para manter o ponto de montagem mesmo após as máquinas terem sido desligadas, basta abrir o arquivo /etc/fstab na máquina cliente e adicionar a linha:
 
 ```sh
 ip_servidor:/seu_nome  /seu_nome  nfs  defaults  0  0
