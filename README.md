@@ -62,6 +62,12 @@ Caso esteja no diretório pessoal, ou qualquer outro fora do raiz, deve-se passa
 sudo mount -t nfs ip_servidor:/seu_nome  ~/seu_nome
 ```
 
+Para manter o ponto e montagem mesmo após as máquinas terem sido desligadas, basta abrir o arquivo /etc/fstab na máquina cliente e adicionar a linha:
+
+```sh
+ip_servidor:/seu_nome  /seu_nome  nfs  defaults  0  0
+```
+
 ## Configuração do servidor apache
 
 Para distribuições que tem debian como base, o nome do pacote seria apache2, todavia, como a AMI escolhida foi o Amazon Linux 2, então ele tem red hat como base, logo o nome do pacote aqui é httpd.
