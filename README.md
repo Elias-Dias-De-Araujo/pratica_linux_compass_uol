@@ -77,7 +77,7 @@ sudo systemctl enable httpd
 ```sh
 #!/bin/bash
 
-date_hour=$(TZ="America/Fortaleza" date +"%Y-%m-%d %H:%M:%S")
+date_hour=$(TZ="America/Fortaleza" date +"%d-%m-%Y %H:%M:%S")
 status_server=$(systemctl is-active httpd)
 
 if [ "$status_server" == "active" ]; then
